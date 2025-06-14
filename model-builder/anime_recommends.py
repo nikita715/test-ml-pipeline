@@ -6,7 +6,8 @@ from lightfm import LightFM
 from lightfm.data import Dataset
 from sklearn.preprocessing import MultiLabelBinarizer
 
-from s3_utils import load_csv_from_s3, build_s3_filesystem, save_pickle_to_s3, save_npz_to_s3
+from s3_utils import load_csv_from_s3, build_s3_filesystem, save_pickle_to_s3, save_npz_to_s3, \
+    load_and_combine_parquet_files
 
 load_dotenv()
 
@@ -14,10 +15,9 @@ fs = build_s3_filesystem()
 
 s3_data_path = os.getenv("S3_DATA_PATH")
 
-
 print("Loading anime and ratings data")
 anime = load_csv_from_s3(fs, f"{s3_data_path}/anime.csv")
-ratings = load_csv_from_s3(fs, f"{s3_data_path}/rating.csv")
+ratings = load_and_combine_parquet_files(fs)
 
 print("Preparing data")
 anime = anime.dropna(subset=['name'])
@@ -33,7 +33,7 @@ anime = pd.concat([anime[['anime_id', 'name', 'type', 'episodes', 'members']], g
 anime['episodes'] = pd.to_numeric(anime['episodes'], errors='coerce').fillna(1).astype(int)
 anime['members'] = pd.to_numeric(anime['members'], errors='coerce').fillna(0).astype(int)
 
-ratings = ratings[ratings["anime_id"].isin(anime["anime_id"])]
+ratings = ratings[ratings["animeId"].isin(anime["anime_id"])]
 
 all_item_features = set()
 
@@ -47,7 +47,7 @@ for _, row in anime.iterrows():
 
 dataset = Dataset()
 dataset.fit(
-    users=ratings['user_id'].unique(),
+    users=ratings['userId'].unique(),
     items=anime['anime_id'].unique(),
     item_features=all_item_features
 )
@@ -69,7 +69,7 @@ item_features = dataset.build_item_features(anime_features)
 
 print("Building interactions")
 interactions, _ = dataset.build_interactions([
-    (row['user_id'], row['anime_id'], row['rating']) for _, row in ratings.iterrows()
+    (row['userId'], row['animeId'], row['rating']) for _, row in ratings.iterrows()
 ])
 
 print("Fitting model")
