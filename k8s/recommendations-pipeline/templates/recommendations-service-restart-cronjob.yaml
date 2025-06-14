@@ -4,10 +4,13 @@ metadata:
   name: restart-recommendations-service-deployment-cronjob
 spec:
   schedule: "*/2 * * * *"
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
       template:
         spec:
+          activeDeadlineSeconds: 60
           containers:
             - name: kubectl
               image: bitnami/kubectl:latest
