@@ -6,7 +6,7 @@ start-minikube:
 	minikube start
 
 build-data-exporter:
-	eval $(minikube -p minikube docker-env) && \
+	eval $$(minikube -p minikube docker-env) && \
 	docker build -t nikita715/data-exporter:latest --no-cache ./data-exporter
 
 build-event-generator:
