@@ -1,0 +1,22 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: model-builder-cronjob
+spec:
+  schedule: {{ quote .Values.modelBuilder.schedule }}
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 3
+  jobTemplate:
+    metadata:
+      name: model-builder
+    spec:
+      completions: 1
+      parallelism: 1
+      backoffLimit: 1
+      template:
+        spec:
+          containers:
+            - name: model-builder
+              image: {{ .Values.modelBuilder.image.repository }}:{{ .Values.modelBuilder.image.tag }}
+              imagePullPolicy: Never
+          restartPolicy: OnFailure

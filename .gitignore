@@ -6,3 +6,5 @@ pyvenv.cfg
 */Lib
 */Scripts
 .gradle
+Chart.lock
+*.tgz

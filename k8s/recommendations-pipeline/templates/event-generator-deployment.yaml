@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: event-generator
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: event-generator
+  template:
+    metadata:
+      labels:
+        app: event-generator
+    spec:
+      containers:
+        - name: event-generator
+          image: {{ .Values.eventGenerator.image.repository }}:{{ .Values.eventGenerator.image.tag }}
+          imagePullPolicy: Never

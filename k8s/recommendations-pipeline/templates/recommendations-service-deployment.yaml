@@ -1,0 +1,20 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: recommendations-service
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: recommendations-service
+  template:
+    metadata:
+      labels:
+        app: recommendations-service
+    spec:
+      containers:
+        - name: recommendations-service
+          image: {{ .Values.recommendationsService.image.repository }}:{{ .Values.recommendationsService.image.tag }}
+          imagePullPolicy: Never
+          ports:
+            - containerPort: 8000

@@ -26,9 +26,9 @@ private const val databaseZipUrl =
     "https://www.kaggle.com/api/v1/datasets/download/CooperUnion/anime-recommendations-database"
 private const val localDataPath = "data"
 
-private const val kafkaBootstrapServer = "localhost:9092"
+private const val kafkaBootstrapServer = "recommendations-pipeline-kafka:9092"
 private const val ratingsTopicName = "ratings"
-private const val schemaRegistryUrl = "http://localhost:8081"
+private const val schemaRegistryUrl = "http://recommendations-pipeline-schema-registry:8081"
 
 fun main() {
     downloadAndUnzipData()

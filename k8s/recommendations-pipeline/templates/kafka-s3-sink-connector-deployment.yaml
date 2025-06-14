@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: kafka-s3-sink-connector
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: kafka-s3-sink-connector
+  template:
+    metadata:
+      labels:
+        app: kafka-s3-sink-connector
+    spec:
+      containers:
+        - name: kafka-s3-sink-connector
+          image: {{ .Values.kafkaS3SinkConnector.image.repository }}:{{ .Values.kafkaS3SinkConnector.image.tag }}
+          imagePullPolicy: Never

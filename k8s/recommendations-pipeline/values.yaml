@@ -1,0 +1,56 @@
+kafka:
+  controller:
+    replicaCount: 1
+  listeners:
+    client:
+      containerPort: 9092
+      protocol: PLAINTEXT
+  kraft:
+    enabled: true
+  extraConfigYaml:
+    offsets.topic.replication.factor: 1
+
+minio:
+  auth:
+    rootUser: minioadmin
+    rootPassword: minioadmin
+  defaultBuckets: data,model
+  persistence:
+    enabled: true
+    size: 5Gi
+
+schema-registry:
+  kafka:
+    enabled: false
+  externalKafka:
+    brokers: PLAINTEXT://recommendations-pipeline-kafka:9092
+
+kafka-ui:
+  yamlApplicationConfig:
+    kafka:
+      clusters:
+        - name: recommendations-pipeline-kafka
+          bootstrapServers: recommendations-pipeline-kafka:9092
+          schemaRegistry: http://recommendations-pipeline-schema-registry:8081
+
+eventGenerator:
+  enabled: true
+  image:
+    repository: nikita715/event-generator
+    tag: latest
+
+kafkaS3SinkConnector:
+  image:
+    repository: nikita715/kafka-s3-sink-connector
+    tag: latest
+
+modelBuilder:
+  image:
+    repository: nikita715/model-builder
+    tag: latest
+  schedule: "*/2 * * * *"
+
+recommendationsService:
+  image:
+    repository: nikita715/recommendations-service
+    tag: latest

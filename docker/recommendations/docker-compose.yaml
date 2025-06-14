@@ -37,7 +37,7 @@ services:
       SCHEMA_REGISTRY_KAFKASTORE_BOOTSTRAP_SERVERS: PLAINTEXT://recommendations_kafka:29092
 
   kafka-s3-connector:
-    build: kafka-s3-sink-connector
+    build: ../../kafka-s3-sink-connector
     container_name: recommendations_kafka_s3_connector
     depends_on:
       - kafka

@@ -1,5 +1,6 @@
 plugins {
     kotlin("jvm") version "2.1.10"
+    id("com.gradleup.shadow") version "8.3.6"
 }
 
 group = "dev.nikst"
@@ -24,6 +25,12 @@ dependencies {
     implementation("com.opencsv:opencsv:5.9")
 
     testImplementation(kotlin("test"))
+}
+
+tasks.shadowJar {
+    manifest {
+        attributes["Main-Class"] = "dev.nikst.MainKt"
+    }
 }
 
 tasks.test {
