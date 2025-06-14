@@ -3,10 +3,12 @@ kind: Deployment
 metadata:
   name: recommendations-service
 spec:
-  replicas: 1
+  replicas: {{ .Values.recommendationsService.replicas }}
   selector:
     matchLabels:
       app: recommendations-service
+  strategy:
+    type: RollingUpdate
   template:
     metadata:
       labels:

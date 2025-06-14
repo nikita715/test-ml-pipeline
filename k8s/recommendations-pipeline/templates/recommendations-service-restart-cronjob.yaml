@@ -1,0 +1,49 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: restart-recommendations-service-deployment-cronjob
+spec:
+  schedule: "*/2 * * * *"
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: kubectl
+              image: bitnami/kubectl:latest
+              command:
+                - /bin/sh
+                - -c
+                - |
+                  kubectl rollout restart deployment recommendations-service
+          restartPolicy: OnFailure
+          serviceAccountName: restart-deployment-sa
+          volumes:
+            - name: kubeconfig
+              emptyDir: {}
+---
+apiVersion: v1
+kind: ServiceAccount
+metadata:
+  name: restart-deployment-sa
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: Role
+metadata:
+  name: restart-deployment-role
+rules:
+  - apiGroups: ["apps"]
+    resources: ["deployments"]
+    verbs: ["get", "list", "patch"]
+---
+apiVersion: rbac.authorization.k8s.io/v1
+kind: RoleBinding
+metadata:
+  name: restart-deployment-binding
+subjects:
+  - kind: ServiceAccount
+    name: restart-deployment-sa
+roleRef:
+  kind: Role
+  name: restart-deployment-role
+  apiGroup: rbac.authorization.k8s.io

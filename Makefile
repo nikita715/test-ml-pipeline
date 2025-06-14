@@ -3,6 +3,10 @@ include .env
 start-minikube:
 	minikube start
 
+build-data-exporter:
+	eval $$(minikube -p minikube docker-env)
+	docker build -t nikita715/data-exporter:latest --no-cache ./data-exporter
+
 build-event-generator:
 	eval $$(minikube -p minikube docker-env)
 	docker build -t nikita715/event-generator:latest --no-cache ./event-generator
@@ -15,7 +19,7 @@ build-model-builder:
 	eval $$(minikube -p minikube docker-env)
 	docker build -t nikita715/model-builder:latest --no-cache ./model-builder
 
-build-recommendation-service:
+build-recommendations-service:
 	eval $$(minikube -p minikube docker-env)
 	docker build -t nikita715/recommendations-service:latest --no-cache -f ./model-builder/Dockerfile-service ./model-builder
 

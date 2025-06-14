@@ -1,0 +1,18 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: data-exporter
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: data-exporter
+  template:
+    metadata:
+      labels:
+        app: data-exporter
+    spec:
+      containers:
+        - name: data-exporter
+          image: {{ .Values.dataExporter.image.repository }}:{{ .Values.dataExporter.image.tag }}
+          imagePullPolicy: Never

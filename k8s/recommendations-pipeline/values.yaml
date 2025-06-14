@@ -33,6 +33,12 @@ kafka-ui:
           bootstrapServers: recommendations-pipeline-kafka:9092
           schemaRegistry: http://recommendations-pipeline-schema-registry:8081
 
+dataExporter:
+  enabled: true
+  image:
+    repository: nikita715/data-exporter
+    tag: latest
+
 eventGenerator:
   enabled: true
   image:
@@ -54,3 +60,4 @@ recommendationsService:
   image:
     repository: nikita715/recommendations-service
     tag: latest
+  replicas: 3

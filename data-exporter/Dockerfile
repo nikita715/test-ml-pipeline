@@ -11,7 +11,8 @@ WORKDIR /app
 
 COPY --from=build /app/build/libs/*.jar app.jar
 
-ENV KAFKA_BOOTSTRAP_SERVERS="recommendations-pipeline-kafka:9092"
-ENV SCHEMA_REGISTRY_URL="http://recommendations-pipeline-schema-registry:8081"
+ENV AWS_ACCESS_KEY_ID="minioadmin"
+ENV AWS_SECRET_ACCESS_KEY="minioadmin"
+ENV S3_ENDPOINT_URL="http://recommendations-pipeline-minio:9000"
 
 ENTRYPOINT ["java", "-jar", "app.jar"]
