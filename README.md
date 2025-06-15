@@ -37,8 +37,10 @@ A proof-of-concept MLOps pipeline for TV show recommendations based on the flow 
 
 ### Prerequisites
 
-- [Docker](https://www.docker.com/get-started) — Container runtime for building and running services
-- [Minikube](https://minikube.sigs.k8s.io/docs/start/) — Local Kubernetes cluster for deploying the microservices
+- [Docker](https://www.docker.com/get-started) — Container runtime
+- [kubectl](https://kubernetes.io/ru/docs/tasks/tools/install-kubectl/) — Kubernetes CLI
+- [Helm](https://helm.sh/docs/intro/install/) — Kubernetes package manager
+- [Minikube](https://minikube.sigs.k8s.io/docs/start/) — Local Kubernetes cluster
 
 Make sure both Docker and Minikube are installed and running on your system before proceeding.
 
