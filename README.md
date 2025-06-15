@@ -1,6 +1,6 @@
 # 📺 TV Show Recommendations Pipeline
 
-A proof-of-concept MLOps pipeline for TV show recommendations using microservices, real-time event streaming, automated model training (LightFM), and scalable deployment with Kubernetes.
+A proof-of-concept MLOps pipeline for TV show recommendations based on the flow of user ratings, using microservices, real-time event streaming, automated model training (LightFM), and scalable deployment with Kubernetes.
 
 ---
 
