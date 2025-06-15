@@ -1,6 +1,6 @@
-# 📺 TV Show Recommendation System
+# 📺 TV Show Recommendations Pipeline
 
-This project implements a machine learning-based recommendation system for TV shows using a microservices architecture, real-time event processing, and container orchestration with Kubernetes.
+A proof-of-concept MLOps pipeline for TV show recommendations using microservices, real-time event streaming, automated model training (LightFM), and scalable deployment with Kubernetes.
 
 ---
 
