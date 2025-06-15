@@ -30,6 +30,25 @@ This project implements a machine learning-based recommendation system for TV sh
 - **Apache Kafka**, **Schema Registry**, **S3 Sink Connector**
 - **MinIO**
 - **lightfm**
+- **FastAPI**
+---
+
+## ⚙️ Installation
+
+### Prerequisites
+
+- [Docker](https://www.docker.com/get-started) — Container runtime for building and running services
+- [Minikube](https://minikube.sigs.k8s.io/docs/start/) — Local Kubernetes cluster for deploying the microservices
+
+Make sure both Docker and Minikube are installed and running on your system before proceeding.
+
+### Startup
+
+To build and start the entire system, run:
+
+```bash
+make all
+```
 
 ---
 
