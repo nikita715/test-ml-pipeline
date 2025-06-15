@@ -25,12 +25,12 @@ This project implements a machine learning-based recommendation system for TV sh
 
 ## 🔧 Technologies Used
 
-- **Python**, **Kotlin**
-- **Kubernetes**, **Helm**
-- **Apache Kafka**, **Schema Registry**, **S3 Sink Connector**
-- **MinIO**
-- **lightfm**
-- **FastAPI**
+- **Kotlin**
+- **Python**, **FastAPI**
+- **Kubernetes**, **Helm** - Container orchestration
+- **Apache Kafka**, **Schema Registry**, **S3 Sink Connector** - Event processing
+- **MinIO** - S3 Storage
+- **lightfm** - Model training
 ---
 
 ## ⚙️ Installation
@@ -48,6 +48,25 @@ To build and start the entire system, run:
 
 ```bash
 make all
+```
+
+### Testing
+
+To test the recommendations-service, first expose its port by running:
+
+```bash
+make open-recommendations-service-port
+```
+
+Then send a recommendation request with some `userId` to your opened port, for example:
+
+```bash
+curl --location 'http://127.0.0.1:65388/recommend' \
+--header 'Content-Type: application/json' \
+--data '{
+    "user_id": 1,
+    "num_items": 10
+}'
 ```
 
 ---
