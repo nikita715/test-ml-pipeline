@@ -23,13 +23,13 @@ build-model-builder:
 
 build-recommendations-service:
 	eval $$(minikube -p minikube docker-env) && \
-	docker build -t nikita715/recommendations-service:latest --no-cache -f ./model-builder/Dockerfile-service ./model-builder
+	docker build -t nikita715/recommendations-service:latest --no-cache ./recommendations-service
 
 helm-update-dependencies:
-	helm dependency update ./k8s/recommendations-pipeline
+	helm dependency update ./deploy/helm/chart
 
 helm-upgrade:
-	helm upgrade --install recommendations-pipeline ./k8s/recommendations-pipeline
+	helm upgrade --install recommendations-pipeline -n recommendations-pipeline --create-namespace ./deploy/helm/chart
 
 open-recommendations-service-port:
 	minikube service recommendations-service --url

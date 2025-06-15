@@ -6,7 +6,7 @@ RUN apt-get update && apt-get install -y gcc \
     && rm -rf /var/lib/apt/lists/*
 
 COPY requirements.txt requirements.txt
-COPY anime_service.py anime_service.py
+COPY service.py service.py
 COPY s3_utils.py s3_utils.py
 
 RUN pip install --no-cache-dir -r requirements.txt
@@ -19,4 +19,4 @@ ENV S3_MODEL_PATH="s3://model"
 
 EXPOSE 8000
 
-CMD ["uvicorn", "anime_service:app", "--host", "0.0.0.0", "--port", "8000"]
+CMD ["uvicorn", "service:app", "--host", "0.0.0.0", "--port", "8000"]

@@ -6,7 +6,7 @@ import pickle
 import pandas as pd
 import s3fs
 from s3fs import S3FileSystem
-from scipy.sparse import load_npz, save_npz
+from scipy.sparse import save_npz
 
 
 def build_s3_filesystem():
@@ -34,19 +34,10 @@ def save_pickle_to_s3(fs: S3FileSystem, obj, path: str):
         return f.write(buffer.read())
 
 
-def load_pickle_from_s3(fs: S3FileSystem, path: str):
-    with fs.open(path, 'rb') as f:
-        return pickle.load(f)
-
-
 def save_npz_to_s3(fs: S3FileSystem, obj, path: str):
     with fs.open(path, 'wb') as f:
         save_npz(f, obj)
 
-
-def load_npz_from_s3(fs: S3FileSystem, path: str):
-    with fs.open(path, 'rb') as f:
-        return load_npz(f)
 
 def load_parquet_from_s3(fs, path):
     with fs.open(path, 'rb') as f:
