@@ -30,3 +30,6 @@ helm-update-dependencies:
 
 helm-upgrade:
 	helm upgrade --install recommendations-pipeline ./k8s/recommendations-pipeline
+
+open-recommendations-service-port:
+	minikube service recommendations-service --url
