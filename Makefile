@@ -33,3 +33,6 @@ helm-upgrade:
 
 open-recommendations-service-port:
 	minikube service -n recommendations-pipeline recommendations-service --url
+
+helm-uninstall:
+	helm uninstall -n recommendations-pipeline recommendations-pipeline
