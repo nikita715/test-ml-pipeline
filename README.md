@@ -42,8 +42,6 @@ A proof-of-concept MLOps pipeline for TV show recommendations based on the flow 
 - [Helm](https://helm.sh/docs/intro/install/) — Kubernetes package manager
 - [Minikube](https://minikube.sigs.k8s.io/docs/start/) — Local Kubernetes cluster
 
-Make sure both Docker and Minikube are installed and running on your system before proceeding.
-
 ### Startup
 
 To build and start the entire system, run:
