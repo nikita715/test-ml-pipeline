@@ -32,4 +32,4 @@ helm-upgrade:
 	helm upgrade --install recommendations-pipeline -n recommendations-pipeline --create-namespace ./deploy/helm/chart
 
 open-recommendations-service-port:
-	minikube service recommendations-service --url
+	minikube service -n recommendations-pipeline recommendations-service --url
