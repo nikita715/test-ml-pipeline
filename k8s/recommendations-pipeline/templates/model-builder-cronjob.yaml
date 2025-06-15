@@ -10,12 +10,11 @@ spec:
     metadata:
       name: model-builder
     spec:
-      completions: 1
-      parallelism: 1
-      backoffLimit: 1
       activeDeadlineSeconds: 60
+      ttlSecondsAfterFinished: 120
       template:
         spec:
+          terminationGracePeriodSeconds: 120
           containers:
             - name: model-builder
               image: {{ .Values.modelBuilder.image.repository }}:{{ .Values.modelBuilder.image.tag }}

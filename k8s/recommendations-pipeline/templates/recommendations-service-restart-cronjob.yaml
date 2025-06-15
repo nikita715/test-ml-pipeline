@@ -8,9 +8,11 @@ spec:
   failedJobsHistoryLimit: 3
   jobTemplate:
     spec:
+      ttlSecondsAfterFinished: 120
       template:
         spec:
           activeDeadlineSeconds: 60
+          terminationGracePeriodSeconds: 120
           containers:
             - name: kubectl
               image: bitnami/kubectl:latest
