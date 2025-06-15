@@ -11,7 +11,7 @@ build-data-exporter:
 
 build-event-generator:
 	eval $$(minikube -p minikube docker-env) && \
-	docker build -t nikita715/event-generator:latest ./event-generator
+	docker build -t nikita715/event-generator:latest --no-cache ./event-generator
 
 build-kafka-s3-sink-connector:
 	eval $$(minikube -p minikube docker-env) && \
